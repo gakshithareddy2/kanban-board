@@ -14,44 +14,87 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
-  const [tasks, setTasks] = useState([]);
 
+  // 🔥 HISTORY STATE
+  const [history, setHistory] = useState([[]]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const tasks = history[currentIndex];
+
+  // 🔥 FIXED UPDATE FUNCTION (NO BUGS)
+  const updateTasks = (newTasks) => {
+    setHistory((prevHistory) => {
+      const updated = prevHistory.slice(0, currentIndex + 1);
+      updated.push(newTasks);
+      return updated;
+    });
+
+    setCurrentIndex((prevIndex) => prevIndex + 1);
+  };
+
+  // ADD TASK
   const addTask = (text, priority) => {
-    setTasks((prev) => [
-      ...prev,
+    const newTasks = [
+      ...tasks,
       { id: Date.now(), text, status: "todo", priority },
-    ]);
+    ];
 
+    updateTasks(newTasks);
     toast.success("Task added ✅", { toastId: "add-task" });
   };
 
+  // MOVE TASK
   const moveTask = (id) => {
-    setTasks((prev) =>
-      prev.map((t) => {
-        if (t.id === id) {
-          if (t.status === "todo") {
-            toast.info("Moved to Progress 🚀", {
-              toastId: `move-${id}`,
-            });
-            return { ...t, status: "progress" };
-          }
-
-          if (t.status === "progress") {
-            toast.success("Task Completed 🎉", {
-              toastId: `done-${id}`,
-            });
-            return { ...t, status: "done" };
-          }
+    const newTasks = tasks.map((t) => {
+      if (t.id === id) {
+        if (t.status === "todo") {
+          toast.info("Moved to Progress 🚀", {
+            toastId: `move-${id}`,
+          });
+          return { ...t, status: "progress" };
         }
-        return t;
-      })
-    );
+
+        if (t.status === "progress") {
+          toast.success("Task Completed 🎉", {
+            toastId: `done-${id}`,
+          });
+          return { ...t, status: "done" };
+        }
+      }
+      return t;
+    });
+
+    updateTasks(newTasks);
   };
 
+  // DELETE TASK
   const deleteTask = (id) => {
-    setTasks((prev) => prev.filter((t) => t.id !== id));
+    const newTasks = tasks.filter((t) => t.id !== id);
 
+    updateTasks(newTasks);
     toast.error("Task deleted ❌", { toastId: `delete-${id}` });
+  };
+
+  // 🔥 FIXED UNDO
+  const undo = () => {
+    setCurrentIndex((prev) => {
+      if (prev > 0) {
+        toast.info("Undo ↩️");
+        return prev - 1;
+      }
+      return prev;
+    });
+  };
+
+  // 🔥 FIXED REDO
+  const redo = () => {
+    setCurrentIndex((prev) => {
+      if (prev < history.length - 1) {
+        toast.info("Redo ↪️");
+        return prev + 1;
+      }
+      return prev;
+    });
   };
 
   const getTasks = (status) => tasks.filter((t) => t.status === status);
@@ -71,13 +114,29 @@ export default function App() {
   return (
     <div className="app">
 
+      {/* HEADER */}
       <div className="header">
         <h1>TaskFlow</h1>
         <p>Manage your workflow efficiently</p>
+
+        {/* UNDO REDO BUTTONS */}
+        <div className="undo-redo">
+          <button onClick={undo} disabled={currentIndex === 0}>
+            Undo
+          </button>
+
+          <button
+            onClick={redo}
+            disabled={currentIndex === history.length - 1}
+          >
+            Redo
+          </button>
+        </div>
       </div>
 
       <div className="layout">
 
+        {/* BOARD */}
         <div className="board">
           <Column
             title="To Do"
@@ -101,6 +160,7 @@ export default function App() {
           />
         </div>
 
+        {/* INSIGHTS */}
         <div className="insights">
           <h3>Project Insights</h3>
 
