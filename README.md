@@ -25,8 +25,7 @@ A modern Kanban board web app to manage tasks efficiently with priority levels a
 ---
 
 ## 📸 Screenshots
-
-<img width="1920" height="1080" alt="Screenshot (1679)" src="https://github.com/user-attachments/assets/5f5df6ef-6f9b-4e8d-b9a4-51365702be7c" />
+<img width="1920" height="829" alt="Screenshot (1684)" src="https://github.com/user-attachments/assets/3dab9eab-171a-4b4b-8676-3295cd11e799" />
 
 ---
 
