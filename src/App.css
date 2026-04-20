@@ -1,0 +1,173 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+}
+
+/* HEADER */
+.header {
+  padding: 20px;
+}
+.header h1 {
+  color: #a855f7;
+}
+.header p {
+  color: #94a3b8;
+}
+
+/* LAYOUT */
+.layout {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+.board {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+}
+
+/* COLUMN */
+.column {
+  background: #1e293b;
+  padding: 15px;
+  border-radius: 12px;
+  width: 300px;
+}
+
+.column input,
+.column select {
+  width: 100%;
+  margin: 5px 0;
+  padding: 8px;
+  background: #334155;
+  border: none;
+  border-radius: 6px;
+  color: white;
+}
+
+/* ADD BUTTON */
+.add-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #9333ea, #ec4899);
+  color: white;
+  cursor: pointer;
+}
+.add-btn:disabled {
+  opacity: 0.5;
+}
+
+/* TASK */
+.task {
+  background: #334155;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+/* FIXED HEADER ALIGNMENT */
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* BADGE */
+.badge {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: white;
+}
+
+/* COLORS */
+.low {
+  background: #16a34a;
+}
+.medium {
+  background: #f59e0b;
+}
+.high {
+  background: #dc2626;
+}
+
+/* DELETE BUTTON */
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: #cbd5f5;
+  cursor: pointer;
+}
+.delete-btn:hover {
+  color: red;
+}
+
+/* TEXT */
+.task-text {
+  margin: 6px 0;
+}
+
+/* MOVE */
+.move {
+  color: #3b82f6;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* INSIGHTS */
+.insights {
+  width: 250px;
+  background: #1e293b;
+  padding: 15px;
+  border-radius: 12px;
+}
+
+.stats {
+  display: flex;
+  gap: 10px;
+}
+
+.box {
+  flex: 1;
+  background: #334155;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.done {
+  background: #14532d;
+}
+
+/* CHART */
+.chart {
+  height: 150px;
+}
+
+/* PROGRESS */
+.progress-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.bar {
+  height: 5px;
+  background: #334155;
+  border-radius: 5px;
+}
+
+.bar div {
+  height: 5px;
+  background: #3b82f6;
+  border-radius: 5px;
+}
+
+/* TOAST */
+.Toastify__toast {
+  border-radius: 10px;
+}
